@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Corrida de carros</title>
+     <!-- Lib -->
+     <script src="./lib/p5.min.js"></script>
+     <script src="./lib/p5.dom.min.js"></script>
+     <script src="./lib/p5.sound.min.js"></script>
+     <script src="./lib/p5.play.js"></script>
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.min.js"></script>
+    <script src="./p5.play.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+    <script>
+      //Firebase Config
+      const firebaseConfig = {
+        apiKey: "AIzaSyCo8ZHLf8vue-VlU_vl8Gcc-ZHixiAVyeU",
+        authDomain: "jogo-de-corrida-ec21e.firebaseapp.com",
+        databaseURL: "https://jogo-de-corrida-ec21e-default-rtdb.firebaseio.com",
+        projectId: "jogo-de-corrida-ec21e",
+        storageBucket: "jogo-de-corrida-ec21e.appspot.com",
+        messagingSenderId: "698220426754",
+        appId: "1:698220426754:web:485095a9fe1b87bf76591b"
+      };  
+
+
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+  </head>
+  <body>
+      <script src="./js/Form.js"></script>
+      <script src="./js/Game.js"></script>
+      <script src="./js/Player.js"></script>
+      <script src="sketch.js"></script>
+  </body>
+</html>
