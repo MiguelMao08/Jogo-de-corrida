@@ -3,6 +3,7 @@ var backgroundImg;
 var gameState, playerCount;
 var database;
 var carro1Img, carro2Img, pistaImg;
+var carro1, carro2;
 
 function preload(){
     backgroundImg = loadImage("./assets/planodefundo.png");
@@ -24,6 +25,12 @@ function setup(){
 
 function draw(){
    background(backgroundImg);
+   if(playerCount==2){
+    game.atualizarEstado(1);
+   };
+   if(gameState==1){
+    game.play();
+   };
 }
 
 function windowResized() {

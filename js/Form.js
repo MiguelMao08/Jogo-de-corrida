@@ -40,4 +40,9 @@ class Form {
         
         })
     }
+
+    esconder(){
+        this.mensagem.hide();
+        this.nomeDoJogo.hide();
+    }
 }
