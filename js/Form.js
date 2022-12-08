@@ -32,7 +32,12 @@ class Form {
             this.botaoJogar.hide();
             var nome = this.entrada.value();
             this.mensagem.html(`olá ${nome}</br>Espere o outro jogador entrar`);
-
+            playerCount += 1;
+            player.nome = nome;
+            player.indice = playerCount;
+            player.addPlayer();
+            player.atualizarContagem(playerCount);
+        
         })
     }
 }
