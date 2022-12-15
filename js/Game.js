@@ -44,25 +44,32 @@ class Game {
         if(allPlayers != undefined){
             image(pistaImg,0,-height*5,width,height*6);
 
-            var index = 0;
+            var indice = 0;
             for(var plr in allPlayers){
-                index = index + 1;
+                indice = indice + 1;
                 var x = allPlayers[plr].positionX;
                 var y = height - allPlayers[plr].positionY;
 
-                carros[index-1]. position.x = x;
-                carros[index-1]. position.y = y;
+                carros[indice-1].position.x = x;
+                carros[indice-1].position.y = y;
+                
+                if(indice == player.indice){
+                    fill("red");
+                    rect(x,y,30,30);
+                    camera.position.y=carros[indice-1].position.y;
+                }
             }
 
 
             drawSprites();
+            this.controlaCarros();
         }
-        
+    
     }
 
     //movimento dos carros
     controlaCarros(){
-        if(keyIsDonw(UP_ARROW)){
+        if(keyIsDown(UP_ARROW)){
             player.positionY += 10;
             player.atualizar();
         }

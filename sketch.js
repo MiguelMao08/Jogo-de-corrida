@@ -3,7 +3,7 @@ var backgroundImg;
 var gameState, playerCount;
 var database;
 var carro1Img, carro2Img, pistaImg;
-var carro1, carro2, carros;
+var carro1, carro2, carros=[];
 var allPlayers;
 
 function preload(){
@@ -33,6 +33,7 @@ function draw(){
    if(gameState==1){
     game.play();
    };
+
 
 }
 

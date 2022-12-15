@@ -49,7 +49,7 @@ class Player {
 
     //atualizar o BD
     atualizar(){
-        var playerIndex = "players/player" + this.index;
+        var playerIndex = "players/player" + this.indice;
         database.ref(playerIndex).update({
             positionX: this.positionX,
             positionY: this.positionY,
@@ -57,7 +57,7 @@ class Player {
     }
     //lê as posições X e Y do BD para iniciar o jogo
     pegarDistancia(){
-        var playerDistanceRef = database.ref("players/player"+this.index);
+        var playerDistanceRef = database.ref("players/player"+this.indice);
         playerDistanceRef.on("value", data =>{
             var data = data.val();
             this.positionX = data.positionX;
