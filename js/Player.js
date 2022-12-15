@@ -37,4 +37,33 @@ class Player {
             positionY: this.positionY,
         })
     }
-}
+
+    //pega os dados de todos os players do BD 
+
+    static pegaInfoPlayers(){
+        var playerInfoRef = database.ref("players");
+        playerInfoRef.on("value", data =>{
+            allPlayers = data.val();
+        });
+    }
+
+    //atualizar o BD
+    atualizar(){
+        var playerIndex = "players/player" + this.index;
+        database.ref(playerIndex).update({
+            positionX: this.positionX,
+            positionY: this.positionY,
+        });
+    }
+    //lê as posições X e Y do BD para iniciar o jogo
+    pegarDistancia(){
+        var playerDistanceRef = database.ref("players/player"+this.index);
+        playerDistanceRef.on("value", data =>{
+            var data = data.val();
+            this.positionX = data.positionX;
+            this.positionY = data.positionY;
+        });
+    }
+
+    
+}//chave da classe

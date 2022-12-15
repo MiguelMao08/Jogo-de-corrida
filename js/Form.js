@@ -37,8 +37,8 @@ class Form {
             player.indice = playerCount;
             player.addPlayer();
             player.atualizarContagem(playerCount);
-        
-        })
+            player.pegarDistancia();
+        });
     }
 
     esconder(){
