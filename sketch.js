@@ -21,7 +21,6 @@ function setup(){
     game.pegarEstado();
     game.inicio();
     
-    
 }
 
 function draw(){

@@ -4,6 +4,8 @@ class Player {
         this.indice = null;
         this.positionX = 0;
         this.positionY = 0;
+        this.rank = 0;
+        this.pontos = 0;
     }
     //métodos
 
@@ -35,6 +37,8 @@ class Player {
             name: this.nome,
             positionX: this.positionX,
             positionY: this.positionY,
+            rank: this.rank,
+            pontos: this.pontos,
         })
     }
 
@@ -53,6 +57,8 @@ class Player {
         database.ref(playerIndex).update({
             positionX: this.positionX,
             positionY: this.positionY,
+            rank: this.rank,
+            pontos: this.pontos,
         });
     }
     //lê as posições X e Y do BD para iniciar o jogo
