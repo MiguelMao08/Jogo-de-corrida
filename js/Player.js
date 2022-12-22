@@ -6,6 +6,7 @@ class Player {
         this.positionY = 0;
         this.rank = 0;
         this.pontos = 0;
+        this.comb = 185;
     }
     //métodos
 
@@ -39,6 +40,7 @@ class Player {
             positionY: this.positionY,
             rank: this.rank,
             pontos: this.pontos,
+            comb: this.comb,
         })
     }
 
@@ -59,6 +61,7 @@ class Player {
             positionY: this.positionY,
             rank: this.rank,
             pontos: this.pontos,
+            comb: this.comb,
         });
     }
     //lê as posições X e Y do BD para iniciar o jogo

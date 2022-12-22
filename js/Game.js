@@ -83,6 +83,26 @@ class Game {
 
         carros = [carro1,carro2];
         // i        0       1
+
+        gComb = new Group();
+        gMoedas = new Group();
+
+        var obstaclesPositions = [
+            { x: width / 2 + 250, y: height - 800, image: pneuImg },
+            { x: width / 2 - 150, y: height - 1300, image: coneImg },
+            { x: width / 2 + 250, y: height - 1800, image: coneImg  },
+            { x: width / 2 - 180, y: height - 2300, image: pneuImg },
+            { x: width / 2, y: height - 2800, image: pneuImg },
+            { x: width / 2 - 180, y: height - 3300, image: coneImg  },
+            { x: width / 2 + 180, y: height - 3300, image: pneuImg },
+            { x: width / 2 + 250, y: height - 3800, image: pneuImg },
+            { x: width / 2 - 150, y: height - 4300, image: coneImg  },
+            { x: width / 2 + 250, y: height - 4800, image: pneuImg },
+            { x: width / 2, y: height - 5300, image: coneImg  },
+            { x: width / 2 - 180, y: height - 5500, image: pneuImg }
+          ];
+
+        this.addSprites(gMoedas, 20, moedaImg, 0.09);
     }
 
     //pegar o estado do jogo do banco de dados (ler o BD)
@@ -149,6 +169,29 @@ class Game {
            }) 
            window.location.reload();
         })
+    }
+
+    //criar os sprites de combustível, moedas e obstáculos
+    addSprites(grupo, numero, imagem, escala, matriz = []){
+        for(var i=0; i<numero; i++){
+            var x,y;
+
+            if(matriz.length>0){
+                x=1;
+                y=2;
+                imagem=3;
+            }
+            else{
+                x = random(width/2-150, width/2+150);
+                y = random(-height*4.5, height-400);
+            }
+        
+            var sprite = createSprite(x,y);
+            sprite.addImage("sprite", imagem);
+
+            sprite.scale = escala;
+            grupo.add(sprite);
+        }
     }
 }//chave da classe
 
