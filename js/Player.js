@@ -34,7 +34,7 @@ class Player {
         }
 
         database.ref(playerIndex).set({
-            name: this.nome,
+            nome: this.nome,
             positionX: this.positionX,
             positionY: this.positionY,
             rank: this.rank,

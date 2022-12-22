@@ -3,6 +3,9 @@ class Game {
         this.placarTitulo = createElement("h2");
         this.jogador1 = createElement("h2");
         this.jogador2 = createElement("h2");
+
+        //butao de riniciar
+        this.botao = createButton("reset")
     }
     //métodos
 
@@ -17,6 +20,9 @@ class Game {
 
         this.jogador2.position(width/3 - 50, 130);
         this.jogador2.class("leadersText");
+
+        this.botao.position(width-300,130);
+        this.botao.class("customButton");
     }
 
     //mostrar a liderança do jogo
@@ -101,6 +107,7 @@ class Game {
             image(pistaImg,0,-height*5,width,height*6);
             this.elementos();
             this.mostrarLideranca();
+            this.reset();
 
             var indice = 0;
             for(var plr in allPlayers){
@@ -133,5 +140,15 @@ class Game {
         }
     }
     
+    reset(){
+        this.botao.mousePressed(()=>{
+           database.ref("/").set({
+            gameState: 0,
+            playerCount: 0,
+            players:{},
+           }) 
+           window.location.reload();
+        })
+    }
 }//chave da classe
 
