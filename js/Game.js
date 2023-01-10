@@ -134,6 +134,7 @@ class Game {
             this.mostrarLideranca();
             this.reset();
             this.barraDeVida();
+            this.barraDeCombustivel();
 
             var indice = 0;
             for(var plr in allPlayers){
@@ -150,6 +151,7 @@ class Game {
                     camera.position.y=carros[indice-1].position.y;
 
                     this.coletarMoedas(indice);
+                    this.coletarCombustivel(indice);
                 }
             }
 
@@ -248,6 +250,13 @@ class Game {
     }
 
     //coletar os combustíveis
+    coletarCombustivel(indice){
+        carros[indice-1].overlap(gComb, function(collector, collected){
+            player.comb += 10;
+            player.atualizar();
+            collected.remove();
+        })
+    }
 
 
     //barra de vida
@@ -258,6 +267,16 @@ class Game {
         rect(width/2 - 100, height - player.positionY - 400, 185,20);
         fill("red");
         rect(width/2 - 100, height - player.positionY - 400, player.vida,20);
+        pop();
+    }
+    //barra de combustivel
+    barraDeCombustivel(){
+        push();
+        image(combImg, width/2 - 130, height - player.positionY - 370, 20,20);
+        fill("white");
+        rect(width/2 - 100, height - player.positionY - 370, 185,20);
+        fill("orange");
+        rect(width/2 - 100, height - player.positionY - 370, player.comb,20);
         pop();
     }
 
