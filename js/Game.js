@@ -86,6 +86,7 @@ class Game {
 
         gComb = new Group();
         gMoedas = new Group();
+        gObstaculo = new Group();
 
         var obstaclesPositions = [
             { x: width / 2 + 250, y: height - 800, image: pneuImg },
@@ -103,6 +104,8 @@ class Game {
           ];
 
         this.addSprites(gMoedas, 20, moedaImg, 0.09);
+        this.addSprites(gComb, 20, combImg, 0.02);
+        this.addSprites(gObstaculo, obstaclesPositions.length, pneuImg, 0.04,obstaclesPositions);
     }
 
     //pegar o estado do jogo do banco de dados (ler o BD)
@@ -158,6 +161,17 @@ class Game {
             player.positionY += 10;
             player.atualizar();
         }
+
+        if(keyIsDown(LEFT_ARROW) && player.positionX>width/3-50){
+            player.positionX -= 10;
+            player.atualizar();
+            
+        }
+
+        if(keyIsDown(RIGHT_ARROW) && player.positionX<width/2+270){
+            player.positionX += 10;
+            player.atualizar();
+        }
     }
     
     reset(){
@@ -177,9 +191,9 @@ class Game {
             var x,y;
 
             if(matriz.length>0){
-                x=1;
-                y=2;
-                imagem=3;
+                x=matriz[i].x;
+                y=matriz[i].y;
+                imagem=matriz[i].image;
             }
             else{
                 x = random(width/2-150, width/2+150);

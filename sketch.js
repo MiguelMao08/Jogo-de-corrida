@@ -6,7 +6,7 @@ var carro1Img, carro2Img, pistaImg;
 var combImg, moedaImg, pneuImg, coneImg;
 var carro1, carro2, carros=[];
 var allPlayers;
-var gComb, gMoedas;
+var gComb, gMoedas, gObstaculo;
 
 function preload(){
     backgroundImg = loadImage("./assets/planodefundo.png");
