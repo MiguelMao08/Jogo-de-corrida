@@ -7,6 +7,7 @@ var combImg, moedaImg, pneuImg, coneImg;
 var carro1, carro2, carros=[];
 var allPlayers;
 var gComb, gMoedas, gObstaculo;
+var vidaImg;
 
 function preload(){
     backgroundImg = loadImage("./assets/planodefundo.png");
@@ -17,6 +18,7 @@ function preload(){
     moedaImg = loadImage("./assets/goldCoin.png");
     pneuImg = loadImage("./assets/obstacle2.png");
     coneImg = loadImage("./assets/obstacle1.png");
+    vidaImg = loadImage("./assets/life.png");
 }
 
 function setup(){

@@ -126,11 +126,14 @@ class Game {
     play(){
         form.esconder();
         Player.pegaInfoPlayers();
+        player.carrosAoFim();
+
         if(allPlayers != undefined){
             image(pistaImg,0,-height*5,width,height*6);
             this.elementos();
             this.mostrarLideranca();
             this.reset();
+            this.barraDeVida();
 
             var indice = 0;
             for(var plr in allPlayers){
@@ -145,14 +148,40 @@ class Game {
                     fill("red");
                     rect(x,y,30,30);
                     camera.position.y=carros[indice-1].position.y;
+
+                    this.coletarMoedas(indice);
                 }
             }
 
+            this.controlaCarros();
+
+            const linhaDeChegada = height*6 - 100 ;
+
+            if(player.positionY > linhaDeChegada){
+                gameState = 2;
+                player.rank += 1;
+                Player.atualizaCarrosAoFim(player.rank);
+                player.atualizar();
+                this.mostrarRanking();
+            }
 
             drawSprites();
-            this.controlaCarros();
+
         }
     
+    }
+
+    //sweet alert mostrando o ranking
+
+    mostrarRanking(){
+        swal({
+            title: `Incrível!${"\n"}Rank${"\n"}${player.rank}`,
+            text: "Você alcançou a linha de chegada com sucesso!",
+            imageUrl:
+              "https://raw.githubusercontent.com/vishalgaddam873/p5-multiplayer-car-race-game/master/assets/cup.png",
+            imageSize: "100x100",
+            confirmButtonText: "Ok"
+          });
     }
 
     //movimento dos carros
@@ -177,6 +206,7 @@ class Game {
     reset(){
         this.botao.mousePressed(()=>{
            database.ref("/").set({
+            carsAtEnd: 0,
             gameState: 0,
             playerCount: 0,
             players:{},
@@ -207,5 +237,31 @@ class Game {
             grupo.add(sprite);
         }
     }
+
+    //coletar moedas
+    coletarMoedas(indice){
+        carros[indice-1].overlap(gMoedas, function(collector, collected){
+            player.pontos += 1;
+            player.atualizar();
+            collected.remove();
+        })
+    }
+
+    //coletar os combustíveis
+
+
+    //barra de vida
+    barraDeVida(){
+        push();
+        image(vidaImg, width/2 - 130, height - player.positionY - 400, 20,20);
+        fill("white");
+        rect(width/2 - 100, height - player.positionY - 400, 185,20);
+        fill("red");
+        rect(width/2 - 100, height - player.positionY - 400, player.vida,20);
+        pop();
+    }
+
+   
+    
 }//chave da classe
 
