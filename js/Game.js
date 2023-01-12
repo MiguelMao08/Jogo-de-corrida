@@ -12,6 +12,9 @@ class Game {
 
         //verificando a direção do carro
         this.setaEsquerdaAtiva = false;
+
+        //variavel que verifica se o carro explodio
+        this.explosion = false;
     }
     //métodos
 
@@ -80,13 +83,13 @@ class Game {
         playerCount = player.pegarContagem();
         carro1=createSprite(width/2 - 100,height-100);
         carro1.addImage("car1",carro1Img);
-        carro1.addImage("explosao1", explosaoImg);
+        carro1.addImage("explosao", explosaoImg);
         carro1.scale=0.08;
         carro1.shapeColor="red"
 
         carro2=createSprite(width/2 + 100,height-100);
         carro2.addImage("car2",carro2Img);
-        carro2.addImage("explosao2", explosaoImg);
+        carro2.addImage("explosao", explosaoImg);
         carro2.scale=0.08;
         carro2.shapeColor="yellow";
 
@@ -153,6 +156,12 @@ class Game {
 
                 carros[indice-1].position.x = x;
                 carros[indice-1].position.y = y;
+
+                var vidaAtual = allPlayers[plr].vida;
+                if(vidaAtual<=0){
+                    carros[indice-1].changeImage("explosao");
+                    carros[indice-1].scale = 0.3;
+                }
                 
                 if(indice == player.indice){
                     fill("red");
@@ -162,6 +171,12 @@ class Game {
                     this.coletarMoedas(indice);
                     this.coletarCombustivel(indice);
                     this.colisaoObstaculos(indice);
+                    this.colisaoCarros(indice);
+
+                    if(player.vida <=0){
+                        this.explosion = true;
+                        this.movimentoDoCarro = false;
+                    }
                 }
             }
 
@@ -198,8 +213,8 @@ class Game {
     //sweet alert mostrando o fim do jogo
     gameOver(){
         swal({
-            title: ``,
-            text: "",
+            title: `Game Over`,
+            text: "Voce perdeu ",
             imageUrl:
             "https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Down_Sign_Emoji_Icon_ios10_grande.png",
             imageSize: "100x100",
@@ -207,8 +222,13 @@ class Game {
           });
     }
 
+    fim(){
+        console.log("fim de jogo");
+    }
+
     //movimento dos carros
     controlaCarros(){
+        if(!this.explosion){
         if(keyIsDown(UP_ARROW)){
             this.movimentoDoCarro = true;
             player.positionY += 10;
@@ -226,6 +246,7 @@ class Game {
             this.setaEsquerdaAtiva = false;
             player.positionX += 10;
             player.atualizar();
+        }
         }
     }
     
@@ -283,7 +304,7 @@ class Game {
 
         //reduzindo o combustível do carro
         if(player.comb > 0 && this.movimentoDoCarro){
-            player.fuel -= 0.5;
+            player.comb -= 0.5;
         }
 
         //o que acontece se o combustível acabar
@@ -303,7 +324,7 @@ class Game {
             }
 
             if(player.vida > 0){
-                player.vida -= 15;
+                player.vida -= 10;
             }
             player.atualizar();
         }

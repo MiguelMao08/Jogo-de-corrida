@@ -7,7 +7,7 @@ class Player {
         this.rank = 0;
         this.pontos = 0;
         this.comb = 185;
-        this.vida = 185;
+        this.vida = 190;
     }
     //métodos
 
