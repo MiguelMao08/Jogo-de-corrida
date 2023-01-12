@@ -5,7 +5,13 @@ class Game {
         this.jogador2 = createElement("h2");
 
         //butao de riniciar
-        this.botao = createButton("reset")
+        this.botao = createButton("reset");
+
+        //verificando o movimento do carro
+        this.movimentoDoCarro = false;
+
+        //verificando a direção do carro
+        this.setaEsquerdaAtiva = false;
     }
     //métodos
 
@@ -74,10 +80,13 @@ class Game {
         playerCount = player.pegarContagem();
         carro1=createSprite(width/2 - 100,height-100);
         carro1.addImage("car1",carro1Img);
+        carro1.addImage("explosao1", explosaoImg);
         carro1.scale=0.08;
         carro1.shapeColor="red"
+
         carro2=createSprite(width/2 + 100,height-100);
         carro2.addImage("car2",carro2Img);
+        carro2.addImage("explosao2", explosaoImg);
         carro2.scale=0.08;
         carro2.shapeColor="yellow";
 
@@ -152,6 +161,7 @@ class Game {
 
                     this.coletarMoedas(indice);
                     this.coletarCombustivel(indice);
+                    this.colisaoObstaculos(indice);
                 }
             }
 
@@ -174,7 +184,6 @@ class Game {
     }
 
     //sweet alert mostrando o ranking
-
     mostrarRanking(){
         swal({
             title: `Incrível!${"\n"}Rank${"\n"}${player.rank}`,
@@ -186,20 +195,35 @@ class Game {
           });
     }
 
+    //sweet alert mostrando o fim do jogo
+    gameOver(){
+        swal({
+            title: ``,
+            text: "",
+            imageUrl:
+            "https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Down_Sign_Emoji_Icon_ios10_grande.png",
+            imageSize: "100x100",
+            confirmButtonText: "Ok"
+          });
+    }
+
     //movimento dos carros
     controlaCarros(){
         if(keyIsDown(UP_ARROW)){
+            this.movimentoDoCarro = true;
             player.positionY += 10;
             player.atualizar();
         }
 
         if(keyIsDown(LEFT_ARROW) && player.positionX>width/3-50){
+            this.setaEsquerdaAtiva = true;
             player.positionX -= 10;
             player.atualizar();
             
         }
 
         if(keyIsDown(RIGHT_ARROW) && player.positionX<width/2+270){
+            this.setaEsquerdaAtiva = false;
             player.positionX += 10;
             player.atualizar();
         }
@@ -255,7 +279,66 @@ class Game {
             player.comb += 10;
             player.atualizar();
             collected.remove();
-        })
+        });
+
+        //reduzindo o combustível do carro
+        if(player.comb > 0 && this.movimentoDoCarro){
+            player.fuel -= 0.5;
+        }
+
+        //o que acontece se o combustível acabar
+        if(player.comb <= 0){
+            gameState = 2;
+            this.gameOver();
+        }
+    }
+
+    //colisão com obstáculos
+    colisaoObstaculos(indice){
+        if(carros[indice-1].collide(gObstaculo)){
+            if(this.setaEsquerdaAtiva){
+                player.positionX += 100;
+            }else{
+                player.positionX -= 100;
+            }
+
+            if(player.vida > 0){
+                player.vida -= 15;
+            }
+            player.atualizar();
+        }
+    }
+
+     //colisão com carro
+     colisaoCarros(indice){
+        if(indice === 1){
+            if(carros[indice-1].collide(carros[1])){
+                if(this.setaEsquerdaAtiva){
+                    player.positionX += 100;
+                }else{
+                    player.positionX -= 100;
+                }
+
+                if(player.vida > 0){
+                    player.vida -= 15;
+                }
+                player.atualizar();
+            }
+        }
+        if(indice === 2){
+            if(carros[indice-1].collide(carros[0])){
+                if(this.setaEsquerdaAtiva){
+                    player.positionX += 100;
+                }else{
+                    player.positionX -= 100;
+                }
+
+                if(player.vida > 0){
+                    player.vida -= 15;
+                }
+                player.atualizar();
+            }
+        }
     }
 
 

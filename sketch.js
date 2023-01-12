@@ -2,7 +2,7 @@ var form, player, game;
 var backgroundImg;
 var gameState, playerCount;
 var database;
-var carro1Img, carro2Img, pistaImg;
+var carro1Img, carro2Img, pistaImg, explosaoImg;
 var combImg, moedaImg, pneuImg, coneImg;
 var carro1, carro2, carros=[];
 var allPlayers;
@@ -19,6 +19,7 @@ function preload(){
     pneuImg = loadImage("./assets/obstacle2.png");
     coneImg = loadImage("./assets/obstacle1.png");
     vidaImg = loadImage("./assets/life.png");
+    explosaoImg = loadImage("./assets/blast.png");
 }
 
 function setup(){
