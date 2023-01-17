@@ -366,21 +366,21 @@ class Game {
     //barra de vida
     barraDeVida(){
         push();
-        image(vidaImg, width/2 - 130, height - player.positionY - 400, 20,20);
+        image(vidaImg, width/2 - 130, height - player.positionY - 360, 20,20);
         fill("white");
-        rect(width/2 - 100, height - player.positionY - 400, 185,20);
+        rect(width/2 - 100, height - player.positionY - 360, 185,20);
         fill("red");
-        rect(width/2 - 100, height - player.positionY - 400, player.vida,20);
+        rect(width/2 - 100, height - player.positionY - 360, player.vida,20);
         pop();
     }
     //barra de combustivel
     barraDeCombustivel(){
         push();
-        image(combImg, width/2 - 130, height - player.positionY - 370, 20,20);
+        image(combImg, width/2 - 130, height - player.positionY - 330, 20,20);
         fill("white");
-        rect(width/2 - 100, height - player.positionY - 370, 185,20);
+        rect(width/2 - 100, height - player.positionY - 330, 185,20);
         fill("orange");
-        rect(width/2 - 100, height - player.positionY - 370, player.comb,20);
+        rect(width/2 - 100, height - player.positionY - 330, player.comb,20);
         pop();
     }
 
